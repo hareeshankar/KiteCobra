@@ -299,12 +299,12 @@ class GlobalState(rx.State):
 
     def set_api_key(self, value: str):
         """Set API key from input."""
-        self.api_key = value.strip()
+        self.api_key = value
         self.auth_error = ""
 
     def set_api_secret(self, value: str):
         """Set API secret from input."""
-        self.api_secret = value.strip()
+        self.api_secret = value
         self.auth_error = ""
 
     def set_request_token(self, value: str):
