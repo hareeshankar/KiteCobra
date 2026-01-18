@@ -363,50 +363,48 @@ def login_page() -> rx.Component:
                     rx.divider(),
 
                     # API Credentials Form
-                    rx.form(
+                    rx.vstack(
+                        # API Key Field
                         rx.vstack(
-                            # API Key Field
-                            rx.vstack(
-                                rx.text(
-                                    "API Key",
-                                    size="2",
-                                    weight="medium",
-                                    color="white",
-                                ),
-                                rx.input(
-                                    placeholder="Enter your Kite API Key",
-                                    value=GlobalState.api_key,
-                                    on_change=GlobalState.set_api_key,
-                                    size="3",
-                                    width="100%",
-                                ),
-                                spacing="1",
+                            rx.text(
+                                "API Key",
+                                size="2",
+                                weight="medium",
+                                color="white",
+                            ),
+                            rx.input(
+                                placeholder="Enter your Kite API Key",
+                                value=GlobalState.api_key,
+                                on_change=GlobalState.set_api_key,
+                                size="3",
                                 width="100%",
                             ),
-
-                            # API Secret Field
-                            rx.vstack(
-                                rx.text(
-                                    "API Secret",
-                                    size="2",
-                                    weight="medium",
-                                    color="white",
-                                ),
-                                rx.input(
-                                    placeholder="Enter your Kite API Secret",
-                                    type="password",
-                                    value=GlobalState.api_secret,
-                                    on_change=GlobalState.set_api_secret,
-                                    size="3",
-                                    width="100%",
-                                ),
-                                spacing="1",
-                                width="100%",
-                            ),
-
-                            spacing="4",
+                            spacing="1",
                             width="100%",
                         ),
+
+                        # API Secret Field
+                        rx.vstack(
+                            rx.text(
+                                "API Secret",
+                                size="2",
+                                weight="medium",
+                                color="white",
+                            ),
+                            rx.input(
+                                placeholder="Enter your Kite API Secret",
+                                type="password",
+                                value=GlobalState.api_secret,
+                                on_change=GlobalState.set_api_secret,
+                                size="3",
+                                width="100%",
+                            ),
+                            spacing="1",
+                            width="100%",
+                        ),
+
+                        spacing="4",
+                        width="100%",
                     ),
 
                     # Login Button
