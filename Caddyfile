@@ -1,0 +1,18 @@
+:8080 {
+    log {
+        output stdout
+    }
+
+    encode gzip
+
+    # Backend API and WebSocket routes
+    reverse_proxy /_event/* localhost:8000
+    reverse_proxy /ping localhost:8000
+    reverse_proxy /_upload localhost:8000
+    reverse_proxy /api/* localhost:8000
+
+    # Serve static frontend files
+    root * /srv
+    try_files {path} /index.html
+    file_server
+}

@@ -1,0 +1,9 @@
+.web
+.states
+__pycache__
+*.pyc
+*.pyo
+.git
+.gitignore
+*.db
+.claude
