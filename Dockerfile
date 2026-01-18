@@ -35,10 +35,25 @@ COPY rxconfig.py .
 
 # Initialize Reflex and export frontend
 RUN reflex init
-RUN reflex export --frontend-only --no-zip
+
+# Export frontend - create production build
+RUN reflex export --frontend-only --no-zip && \
+    echo "Contents of .web directory:" && \
+    ls -la .web/ || echo ".web directory not found"
 
 # Copy exported frontend to Caddy serve directory
-RUN mkdir -p /srv && cp -r .web/_static/* /srv/
+# The export creates files directly in .web/_static/
+RUN mkdir -p /srv && \
+    if [ -d ".web/_static" ]; then \
+        cp -r .web/_static/* /srv/ && echo "Copied from .web/_static"; \
+    elif [ -d ".web/public" ]; then \
+        cp -r .web/public/* /srv/ && echo "Copied from .web/public"; \
+    else \
+        echo "ERROR: Frontend export directory not found!" && \
+        echo "Contents of .web:" && \
+        ls -la .web/ && \
+        exit 1; \
+    fi
 
 # Copy Caddyfile and start script
 COPY Caddyfile /etc/caddy/Caddyfile
